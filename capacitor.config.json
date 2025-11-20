@@ -1,0 +1,10 @@
+{
+  "appId": "com.sbaigenpro.web2app",
+  "appName": "SbaigenPro",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "server": {
+    "url": "https://www.sbaigenpro.shop",
+    "cleartext": true
+  }
+}
