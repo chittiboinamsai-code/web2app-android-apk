@@ -1,0 +1,28 @@
+steps:
+  - name: 'node:18'
+    entrypoint: npm
+    args: ['install']
+
+  - name: 'node:18'
+    entrypoint: npm
+    args: ['run', 'build']
+
+  - name: 'gcr.io/cloud-builders/gradle'
+    args: ['build', ':app:assembleRelease']
+    dir: 'android'
+    env:
+      - 'JAVA_TOOL_OPTIONS=-XX:MaxHeapSize=8g'
+
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args:
+      - 'cp'
+      - 'android/app/build/outputs/apk/release/app-release.apk'
+      - 'gs://${PROJECT_ID}-apk-builds/sbaigenpro-${SHORT_SHA}.apk'
+
+artifacts:
+  objects:
+    location: 'gs://${PROJECT_ID}-apk-builds'
+    paths:
+      - 'android/app/build/outputs/apk/release/app-release.apk'
+
+timeout: '3600s'
