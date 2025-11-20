@@ -1,0 +1,19 @@
+{
+  "name": "web2app-android",
+  "version": "1.0.0",
+  "description": "Production-ready Android APK builder with Capacitor",
+  "scripts": {
+    "build": "npx cap copy",
+    "build:apk": "npm run build && cd android && ./gradlew assembleRelease",
+    "build:clean": "cd android && ./gradlew clean && ./gradlew assembleRelease",
+    "install": "adb install -r android/app/build/outputs/apk/release/app-release.apk",
+    "uninstall": "adb uninstall com.sbaigenpro.web2app",
+    "logs": "adb logcat",
+    "clean": "cd android && ./gradlew clean"
+  },
+  "dependencies": {
+    "@capacitor/android": "latest",
+    "@capacitor/core": "latest",
+    "@capacitor/cli": "latest"
+  }
+}
